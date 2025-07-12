@@ -1,11 +1,22 @@
 from fastapi import FastAPI
-from routes import user_routes, question_routes
-from middlewares.jwt_middleware import JWTAuthMiddleware
+from fastapi.middleware.cors import CORSMiddleware
+from app.routes import user_routes, question_routes
+from app.middlewares.jwt_middleware import JWTAuthMiddleware
 
 app = FastAPI()
 
+# ✅ Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["http://localhost:3000"] for specific frontend
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"]
+)
+
 # Add JWT middleware
-app.add_middleware(JWTAuthMiddleware)
+# app.add_middleware(JWTAuthMiddleware)
 
 # Include routers
 app.include_router(user_routes.router, prefix="/api")

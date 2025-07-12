@@ -1,4 +1,4 @@
-from db import db
+from app.db import db
 from bson import ObjectId
 import datetime
 
@@ -14,8 +14,8 @@ async def get_all_questions():
 async def create_question(question_data: dict, author: str):
     question_data["author"] = author
     question_data["createdAt"] = datetime.datetime.utcnow().isoformat()
-    result = await db.questions.insert_one(question_data)
-    question_data["id"] = str(result.inserted_id)
+    result = await db.Questions.insert_one(question_data)
+    question_data["_id"] = str(result.inserted_id)  # Convert ObjectId to string
     return question_data
 
 async def vote_question(question_id: str, vote: int):
