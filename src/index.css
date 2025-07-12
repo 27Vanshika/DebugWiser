@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FFFFFF;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.question-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.question-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tag {
+  transition: all 0.2s ease-in-out;
+}
+
+.tag:hover {
+  transform: scale(1.05);
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes fadeOut {
+  from { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  to { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-fadeOut {
+  animation: fadeOut 0.2s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.2s ease-out;
+}
+
+.animate-slideOutRight {
+  animation: slideOutRight 0.2s ease-out;
+}
+
+/* Dropdown animations */
+.dropdown-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.dropdown-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+/* Slide-over specific styles */
+.slide-over-backdrop {
+  backdrop-filter: blur(4px);
+  transition: opacity 0.2s ease-out;
+}
+
+.slide-over-panel {
+  transition: transform 0.2s ease-out;
+}
+
+/* Prevent body scroll when slide-over is open */
+body.slide-over-open {
+  overflow: hidden;
+} 

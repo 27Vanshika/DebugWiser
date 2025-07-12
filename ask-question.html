@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Question - StackIt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'background': '#FFFFFF',
+                        'primary-text': '#000000',
+                        'secondary-text': '#6B7280',
+                        'tag-blue': '#D1FAFF',
+                        'tag-red': '#FECACA',
+                        'tag-yellow': '#FEF3C7',
+                        'tag-green': '#D1FAE5',
+                        'tag-violet': '#EDE9FE',
+                        'search-bg': '#F9FAFB',
+                        'border-card': '#E5E7EB',
+                        'button-hover': '#EF4444',
+                    },
+                    borderRadius: {
+                        'soft': '8px',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-sm border-b border-border-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary-text">StackIt</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-secondary-text hover:text-primary-text px-3 py-2 rounded-soft">Home</a>
+                    <a href="ask-question.html" class="bg-button-hover text-white px-3 py-2 rounded-soft">Ask Question</a>
+                    <a href="#" class="text-secondary-text hover:text-primary-text px-3 py-2 rounded-soft">Categories</a>
+                    <a href="#" class="text-secondary-text hover:text-primary-text px-3 py-2 rounded-soft">Profile</a>
+                    <button id="logoutBtn" class="bg-gray-500 text-white px-4 py-2 rounded-soft hover:bg-gray-600">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-primary-text mb-2">Ask a Question</h1>
+            <p class="text-secondary-text">Share your knowledge and help others learn</p>
+        </div>
+
+        <!-- Ask Question Form -->
+        <div class="bg-white border border-border-card rounded-soft p-6">
+            <form id="askQuestionForm" class="space-y-6">
+                <!-- Title -->
+                <div>
+                    <label for="questionTitle" class="block text-sm font-medium text-secondary-text mb-2">
+                        Title <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="questionTitle" 
+                        placeholder="What's your question? Be specific."
+                        class="w-full px-4 py-3 border border-border-card rounded-soft focus:outline-none focus:ring-2 focus:ring-button-hover text-primary-text"
+                        required
+                    >
+                    <p class="text-xs text-secondary-text mt-1">Keep it concise and clear</p>
+                </div>
+
+                <!-- Question Content -->
+                <div>
+                    <label for="questionContent" class="block text-sm font-medium text-secondary-text mb-2">
+                        Question Details <span class="text-red-500">*</span>
+                    </label>
+                    <textarea 
+                        id="questionContent" 
+                        rows="8"
+                        placeholder="Describe your problem in detail. Include any error messages, code snippets, or relevant context."
+                        class="w-full px-4 py-3 border border-border-card rounded-soft focus:outline-none focus:ring-2 focus:ring-button-hover text-primary-text resize-vertical"
+                        required
+                    ></textarea>
+                    <p class="text-xs text-secondary-text mt-1">The more details you provide, the better answers you'll get</p>
+                </div>
+
+                <!-- Tags -->
+                <div>
+                    <label for="questionTags" class="block text-sm font-medium text-secondary-text mb-2">
+                        Tags <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="questionTags" 
+                        placeholder="e.g., javascript, react, authentication (separate with commas)"
+                        class="w-full px-4 py-3 border border-border-card rounded-soft focus:outline-none focus:ring-2 focus:ring-button-hover text-primary-text"
+                        required
+                    >
+                    <p class="text-xs text-secondary-text mt-1">Add up to 5 tags to help others find your question</p>
+                    
+                    <!-- Popular Tags -->
+                    <div class="mt-3">
+                        <p class="text-xs text-secondary-text mb-2">Popular tags:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag px-2 py-1 text-xs font-medium rounded-soft tag-blue cursor-pointer hover:scale-105">javascript</span>
+                            <span class="tag px-2 py-1 text-xs font-medium rounded-soft tag-yellow cursor-pointer hover:scale-105">react</span>
+                            <span class="tag px-2 py-1 text-xs font-medium rounded-soft tag-green cursor-pointer hover:scale-105">python</span>
+                            <span class="tag px-2 py-1 text-xs font-medium rounded-soft tag-violet cursor-pointer hover:scale-105">css</span>
+                            <span class="tag px-2 py-1 text-xs font-medium rounded-soft tag-red cursor-pointer hover:scale-105">fastapi</span>
+                            <span class="tag px-2 py-1 text-xs font-medium rounded-soft tag-blue cursor-pointer hover:scale-105">authentication</span>
+                            <span class="tag px-2 py-1 text-xs font-medium rounded-soft tag-green cursor-pointer hover:scale-105">database</span>
+                            <span class="tag px-2 py-1 text-xs font-medium rounded-soft tag-yellow cursor-pointer hover:scale-105">api-design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div id="previewSection" class="hidden">
+                    <h3 class="text-lg font-semibold text-primary-text mb-3">Preview</h3>
+                    <div class="bg-search-bg border border-border-card rounded-soft p-4">
+                        <h4 id="previewTitle" class="text-lg font-semibold text-primary-text mb-2"></h4>
+                        <p id="previewContent" class="text-secondary-text text-sm mb-3"></p>
+                        <div id="previewTags" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div class="flex gap-4 pt-4 border-t border-border-card">
+                    <button 
+                        type="submit" 
+                        class="bg-button-hover text-white px-6 py-3 rounded-soft hover:bg-red-600 font-medium"
+                    >
+                        Post Question
+                    </button>
+                    <button 
+                        type="button" 
+                        id="previewBtn"
+                        class="bg-search-bg text-secondary-text px-6 py-3 rounded-soft hover:bg-gray-200 font-medium"
+                    >
+                        Preview
+                    </button>
+                    <button 
+                        type="button" 
+                        onclick="window.location.href='index.html'"
+                        class="bg-gray-300 text-gray-700 px-6 py-3 rounded-soft hover:bg-gray-400 font-medium"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-soft p-6">
+            <h3 class="text-lg font-semibold text-blue-800 mb-3">Writing a Good Question</h3>
+            <ul class="text-blue-700 text-sm space-y-2">
+                <li>• Be specific about what you're trying to achieve</li>
+                <li>• Include relevant code snippets and error messages</li>
+                <li>• Explain what you've already tried</li>
+                <li>• Use clear, descriptive titles</li>
+                <li>• Add appropriate tags to help others find your question</li>
+            </ul>
+        </div>
+    </main>
+
+    <script src="./ask-question.js"></script>
+</body>
+</html> 
