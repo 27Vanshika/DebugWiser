@@ -16,7 +16,7 @@ app.add_middleware(
 )
 
 # Add JWT middleware
-# app.add_middleware(JWTAuthMiddleware)
+app.add_middleware(JWTAuthMiddleware)
 
 # Include routers
 app.include_router(user_routes.router, prefix="/api")
